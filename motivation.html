@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Motivational Boost</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>🔥 Today's Motivation</h2>
+    <div id="motivationText"></div>
+    <br>
+    <a href="analysis.html"><button>See Progress</button></a>
+  </div>
+  <script>
+    const data = JSON.parse(localStorage.getItem("reports")) || [];
+    const last = data[data.length - 1];
+    let msg = "";
+
+    if (!last) msg = "Start logging your effort to unlock motivation!";
+    else {
+      if (last.hours >= 6) msg = "Outstanding effort today! 🔥 Keep crushing it!";
+      else if (last.hours >= 3) msg = "You're making progress. Stay on track! 💪";
+      else msg = "Start strong tomorrow! 🌱 Even one step matters.";
+
+      if (last.milestone) msg += " 🎯 Milestone unlocked. Proud of you!";
+    }
+
+    document.getElementById("motivationText").innerText = msg;
+  </script>
+</body>
+</html>
