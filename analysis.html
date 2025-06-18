@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Progress Graph</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>📊 Your Study Progress</h2>
+    <canvas id="studyChart" width="400" height="200"></canvas>
+    <br>
+    <a href="index.html"><button>Go Back</button></a>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('studyChart').getContext('2d');
+    const data = JSON.parse(localStorage.getItem("reports")) || [];
+
+    const labels = data.map(item => item.date);
+    const hours = data.map(item => item.hours);
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Hours Studied',
+          data: hours,
+          borderColor: 'blue',
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          fill: true,
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
